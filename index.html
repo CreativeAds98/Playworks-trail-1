@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Playworkz Eco Space — Coworking</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1714;
+  --charcoal:#2c2825;
+  --warm:#3d3530;
+  --gold:#c9a96e;
+  --gold-light:#e8cfa0;
+  --gold-pale:#f5eddb;
+  --cream:#faf7f2;
+  --white:#ffffff;
+  --sage:#7a8c7e;
+  --sage-light:#c4d1c7;
+  --stone:#9e9589;
+  --border:rgba(201,169,110,0.2);
+  --border-soft:rgba(201,169,110,0.1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;cursor:none}
+
+/* Custom cursor */
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform .1s}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .12s,width .3s,height .3s,opacity .3s;opacity:0.6}
+
+/* Noise grain */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9997;opacity:.4}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 4rem;
+  background:rgba(250,247,242,0.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-soft);
+  transition:padding .4s;
+}
+nav.scrolled{padding:1rem 4rem;box-shadow:0 4px 40px rgba(26,23,20,.06)}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;
+  color:var(--ink);text-decoration:none;letter-spacing:.02em;
+}
+.nav-logo em{font-style:italic;color:var(--gold)}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{font-size:.8rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);text-decoration:none;transition:color .25s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .35s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  background:var(--ink) !important;color:var(--gold-light) !important;
+  padding:.55rem 1.5rem;border-radius:2px;
+  font-size:.75rem !important;letter-spacing:.12em !important;
+  transition:background .25s !important;
+}
+.nav-cta:hover{background:var(--warm) !important}
+.nav-cta::after{display:none !important}
+
+/* ── NAV MOB TOGGLE── */
+.menu-toggle{
+display:none;
+font-size:28px;
+background:none;
+border:none;
+cursor:pointer;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+.menu-toggle{
+display:block;
+}
+
+.nav-menu{
+position:fixed;
+top:0;
+right:-100%;
+width:250px;
+height:100vh;
+background:white;
+display:flex;
+flex-direction:column;
+padding:80px 30px;
+gap:25px;
+transition:0.4s;
+}
+
+.nav-menu.active{
+right:0;
+}
+
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  display:grid;place-items:center;
+  background:var(--ink);
+
+
+    background-image: 
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
+    url("assets/playworkeco-space-hero1.png"); /* your image */
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero-bg-pattern{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 40%,rgba(201,169,110,.08) 0%,transparent 65%),
+    radial-gradient(ellipse 50% 70% at 10% 80%,rgba(122,140,126,.06) 0%,transparent 55%);
+}
+/* Geometric lines */
+.hero-lines{position:absolute;inset:0;overflow:hidden}
+.hero-lines::before{
+  content:'';position:absolute;
+  top:-10%;left:55%;width:1px;height:120%;
+  background:linear-gradient(to bottom,transparent,rgba(201,169,110,.15),transparent);
+  transform:rotate(12deg);
+}
+.hero-lines::after{
+  content:'';position:absolute;
+  top:20%;left:0;right:0;height:1px;
+  background:linear-gradient(to right,transparent,rgba(201,169,110,.1),transparent);
+}
+.hero-inner{
+  position:relative;z-index:2;text-align:center;
+  padding:0 2rem;max-width:900px;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.8rem;
+  font-size:.72rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:2.5rem;
+  animation:fadeUp .8s ease both;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--gold);opacity:.5}
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,8vw,7rem);
+  font-weight:300;line-height:1.05;
+  color:var(--white);letter-spacing:-.02em;
+  margin-bottom:2rem;
+  animation:fadeUp .8s .12s ease both;
+}
+h1 em{font-style:italic;color:var(--gold-light)}
+h1 strong{font-weight:600}
+.hero-sub{
+  font-size:1.05rem;font-weight:300;line-height:1.8;
+  color:rgba(255,255,255,.55);
+  max-width:580px;margin:0 auto 3.5rem;
+  animation:fadeUp .8s .24s ease both;
+}
+.hero-actions{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .36s ease both}
+.btn-gold{
+  background:var(--gold);color:var(--ink);
+  padding:.9rem 2.4rem;border:none;
+  font-family:'Jost',sans-serif;font-size:.8rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;
+  transition:background .25s,transform .2s,box-shadow .25s;
+  display:inline-block;
+}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,169,110,.3)}
+.btn-ghost{
+  background:transparent;color:rgba(255,255,255,.7);
+  padding:.9rem 2.4rem;
+  border:1px solid rgba(255,255,255,.2);
+  font-family:'Jost',sans-serif;font-size:.8rem;font-weight:400;
+  letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;
+  transition:border-color .25s,color .25s,transform .2s;
+  display:inline-block;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+
+/* Scroll indicator */
+.scroll-hint{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:rgba(255,255,255,.3);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  animation:fadeUp .8s .6s ease both;
+}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1}100%{opacity:0;transform:scaleY(1);transform-origin:top}}
+
+/* ── STRIP ── */
+.strip{
+  background:var(--gold);padding:1rem 4rem;
+  display:flex;justify-content:center;align-items:center;gap:4rem;
+  flex-wrap:wrap;
+}
+.strip-item{
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
+}
+.strip-dot{width:5px;height:5px;background:var(--ink);border-radius:50%;opacity:.4}
+
+/* ── SECTIONS COMMON ── */
+section{padding:7rem 4rem}
+.label{
+  display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;
+}
+.heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:400;line-height:1.15;color:var(--ink);
+  margin-bottom:1.4rem;
+}
+.heading em{font-style:italic;color:var(--gold)}
+.body-text{font-size:1rem;font-weight:300;line-height:1.9;color:var(--stone);max-width:540px}
+.gold-line{width:48px;height:1px;background:var(--gold);margin:1.5rem 0}
+
+/* ── ABOUT / INTRO ── */
+#about{
+  background:var(--white);
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;
+}
+.about-visual{position:relative}
+.about-img{
+  width:100%;
+  aspect-ratio:4/5;
+  border-radius:2px;
+
+  background-image: url("assets/inside-2.JPG"); /* your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position:relative;
+  overflow:hidden;
+}
+.about-img::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 25%,rgba(201,169,110,.1) 0%,transparent 55%);
+}
+.about-img-label{
+  position:absolute;bottom:2rem;left:-1.5rem;
+  background:var(--gold);color:var(--ink);
+  padding:1.2rem 1.8rem;
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  box-shadow:0 8px 40px rgba(0,0,0,.2);
+  line-height:1.2;
+}
+.about-img-label span{display:block;font-family:'Jost',sans-serif;font-size:.7rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem}
+.about-features{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.2rem}
+.feat-row{display:flex;align-items:flex-start;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--border-soft)}
+.feat-row:last-child{border-bottom:none}
+.feat-num{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold);font-weight:400;min-width:28px}
+.feat-content strong{display:block;font-size:.88rem;font-weight:600;letter-spacing:.03em;color:var(--ink);margin-bottom:.25rem}
+.feat-content p{font-size:.82rem;color:var(--stone);line-height:1.6}
+
+/* ── AMBIANCE ── */
+#ambiance{background:var(--ink);color:var(--white)}
+#ambiance .label{color:var(--gold)}
+#ambiance .heading{color:var(--white)}
+#ambiance .body-text{color:rgba(255,255,255,.5);max-width:100%}
+.ambiance-intro{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:end;margin-bottom:4rem}
+.ambiance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(201,169,110,.1)}
+.amb-card{
+  background:var(--charcoal);padding:2.5rem 2rem;
+  position:relative;overflow:hidden;
+  transition:background .4s;
+}
+.amb-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,169,110,.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .4s;
+}
+.amb-card:hover{background:#2f2c29}
+.amb-card:hover::before{opacity:1}
+.amb-icon{font-size:2rem;margin-bottom:1.2rem;display:block}
+.amb-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--white);margin-bottom:.6rem}
+.amb-desc{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7}
+.amb-tag{display:inline-block;margin-top:1rem;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,169,110,.3);padding:.25rem .7rem}
+
+/* ── COWORKING FEATURES ── */
+#features{background:var(--cream)}
+.features-layout{display:grid;grid-template-columns:2fr 3fr;gap:5rem;align-items:start}
+.features-sticky{position:sticky;top:8rem}
+.features-list{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:0}
+.feat-card{
+  background:var(--white);padding:2rem 1.8rem;
+  border:1px solid var(--border-soft);border-radius:1px;
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+}
+.feat-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 48px rgba(26,23,20,.08)}
+.feat-card-icon{font-size:1.8rem;margin-bottom:1rem;display:block}
+.feat-card-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin-bottom:.5rem}
+.feat-card-desc{font-size:.8rem;color:var(--stone);line-height:1.65}
+
+/* ── MEMBERSHIP STATUS ── */
+#status{
+  background:var(--gold-pale);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:3rem 4rem;
+  display:flex;justify-content:space-between;align-items:center;gap:3rem;flex-wrap:wrap;
+}
+.status-msg{flex:1;min-width:280px}
+.status-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--ink);color:var(--gold-light);
+  font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:.45rem 1rem;margin-bottom:1rem;
+}
+.status-badge::before{content:'';width:6px;height:6px;background:#e05c5c;border-radius:50%;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.status-msg h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:var(--ink);margin-bottom:.5rem}
+.status-msg p{font-size:.88rem;color:var(--warm);line-height:1.7}
+.status-action{text-align:center}
+.status-action p{font-size:.78rem;color:var(--stone);margin-top:.8rem;letter-spacing:.05em}
+
+/* ── DISCUSSION ROOM ── */
+#discussion{background:var(--ink);position:relative;overflow:hidden}
+#discussion::before{
+  content:'';position:absolute;
+  top:-100px;right:-100px;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(201,169,110,.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+.discussion-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;position:relative;z-index:2;
+}
+#discussion .label{color:var(--gold)}
+#discussion .heading{color:var(--white)}
+#discussion .gold-line{background:rgba(201,169,110,.4)}
+.room-visual{position:relative}
+.room-card-main{
+  background:var(--charcoal);border:1px solid rgba(201,169,110,.15);
+  padding:2.5rem;border-radius:1px;
+}
+.room-img-placeholder{
+  width:100%;
+  height:220px;
+
+  background-image: 
+  linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.45)),
+  url("assets/disscusion-3.JPG");  /* your image */
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  margin-bottom:1.5rem;
+  border:1px solid rgba(201,169,110,.1);
+  position:relative;
+  overflow:hidden;
+}
+.room-img-placeholder::after{
+  content:'DISCUSSION ROOM';
+  position:absolute;bottom:1rem;left:1rem;
+  font-size:.6rem;letter-spacing:.18em;color:rgba(201,169,110,.5);
+}
+.room-specs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+.spec-item{padding:1rem;background:rgba(255,255,255,.03);border:1px solid rgba(201,169,110,.08)}
+.spec-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.spec-val{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--white);font-weight:400}
+.room-available-badge{
+  position:absolute;top:-14px;right:1.5rem;
+  background:var(--gold);color:var(--ink);
+  font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:.4rem 1rem;
+}
+.room-features-list{margin:2rem 0;display:flex;flex-direction:column;gap:.75rem}
+.room-feat{display:flex;align-items:center;gap:.75rem;font-size:.85rem;color:rgba(255,255,255,.6)}
+.room-feat::before{content:'✦';color:var(--gold);font-size:.6rem;flex-shrink:0}
+
+/* Pricing cards */
+.pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.price-card{
+  padding:1.8rem;border:1px solid rgba(201,169,110,.15);
+  background:rgba(255,255,255,.02);
+  transition:border-color .3s,background .3s;
+}
+.price-card:hover{border-color:rgba(201,169,110,.4);background:rgba(201,169,110,.04)}
+.price-card.highlight{border-color:var(--gold);background:rgba(201,169,110,.06)}
+.price-duration{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.price-amount{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--white);line-height:1}
+.price-amount sup{font-size:1rem;vertical-align:top;margin-top:.4rem;display:inline-block}
+.price-note{font-size:.75rem;color:rgba(255,255,255,.35);margin-top:.4rem}
+.price-card.highlight .price-duration{color:var(--gold)}
+
+/* ── GALLERY / SPACE ── */
+#space{background:var(--white);padding:7rem 0}
+.space-header{padding:0 4rem;margin-bottom:3.5rem;display:flex;justify-content:space-between;align-items:flex-end}
+.space-mosaic{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:2px;padding:0 4rem;
+}
+.mosaic-cell{
+  background:var(--gold-pale);display:flex;align-items:center;justify-content:center;
+  font-size:3rem;position:relative;overflow:hidden;
+  transition:filter .4s;
+  min-height:220px;
+}
+.mosaic-cell::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,169,110,.08),transparent 60%);
+}
+.mosaic-cell:nth-child(1){
+  grid-row:1/3;
+  min-height:450px;
+  background-image:url("assets/inside-1.JPG");
+  background-size:cover;
+  background-position:center;
+}
+
+.mosaic-cell:nth-child(2){
+  background-image:url("assets/cafteria-2.JPG");
+  background-size:cover;
+  background-position:center;
+}
+
+.mosaic-cell:nth-child(3){
+  background-image:url("assets/discussion-1.JPG");
+  background-size:cover;
+  background-position:center;
+}
+
+.mosaic-cell:nth-child(4){
+  background-image:url("assets/cafteria-1.JPG");
+  background-size:cover;
+  background-position:center;
+}
+
+.mosaic-cell:nth-child(5){
+  background-image:url("assets/inside-3.JPG");
+  background-size:cover;
+  background-position:center;
+}
+.mosaic-cell:hover{filter:brightness(1.06)}
+.mosaic-label{position:absolute;bottom:1rem;left:1.2rem;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.mosaic-cell:nth-child(2) .mosaic-label,.mosaic-cell:nth-child(4) .mosaic-label{color:var(--stone)}
+
+
+
+/* ── TESTIMONIALS ── */
+#testimonials{background:var(--cream)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.5rem}
+.testi-card{
+  background:var(--white);padding:2.2rem;
+  border:1px solid var(--border-soft);position:relative;
+}
+.testi-card::before{
+  content:'\201C';
+  font-family:'Cormorant Garamond',serif;font-size:5rem;line-height:1;
+  color:var(--gold);opacity:.3;position:absolute;top:.8rem;left:1.5rem;
+}
+.testi-text{font-size:.9rem;line-height:1.8;color:var(--warm);font-style:italic;margin-bottom:1.5rem;padding-top:1rem}
+.testi-author{display:flex;align-items:center;gap:.8rem;border-top:1px solid var(--border-soft);padding-top:1rem}
+.testi-av{width:36px;height:36px;background:var(--gold-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.testi-name{font-size:.82rem;font-weight:600;color:var(--ink)}
+.testi-role{font-size:.72rem;color:var(--stone);letter-spacing:.04em}
+
+/* ── CONTACT ── */
+#contact{background:var(--ink);color:var(--white)}
+#contact .label{color:var(--gold)}
+#contact .heading{color:var(--white)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;margin-top:3.5rem}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{display:flex;flex-direction:column;gap:.5rem}
+.field label{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.field input,.field select,.field textarea{
+  background:rgba(255,255,255,.04);border:1px solid rgba(201,169,110,.2);
+  color:var(--white);padding:.9rem 1.1rem;
+  font-family:'Jost',sans-serif;font-size:.88rem;outline:none;
+  transition:border-color .2s,background .2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);background:rgba(201,169,110,.05)}
+.field textarea{resize:vertical;min-height:100px}
+.field select option{background:var(--charcoal)}
+.contact-info{padding-top:.5rem}
+.contact-info p{font-size:.9rem;font-weight:300;line-height:1.9;color:rgba(255,255,255,.45);margin-bottom:2.5rem}
+.info-block{display:flex;flex-direction:column;gap:1.5rem}
+.info-row{display:flex;gap:1.2rem;align-items:flex-start}
+.info-icon-box{width:38px;height:38px;border:1px solid rgba(201,169,110,.2);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.info-detail strong{display:block;font-size:.78rem;font-weight:600;letter-spacing:.06em;color:var(--gold-light);margin-bottom:.2rem}
+.info-detail span{font-size:.8rem;color:rgba(255,255,255,.4)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--charcoal);
+  padding:2rem 4rem;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1.5rem;
+  border-top:1px solid rgba(201,169,110,.1);
+}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white)}
+.footer-logo em{font-style:italic;color:var(--gold)}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  section{padding:4rem 1.5rem}
+  #about,#features .features-layout,.discussion-inner,.contact-grid{grid-template-columns:1fr}
+  .programs-grid,.features-list,.pricing-cards,.ambiance-grid,.testi-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  #status{flex-direction:column;text-align:center;padding:2.5rem 1.5rem}
+  .space-mosaic,.space-header{padding:0 1.5rem}
+  .space-mosaic{grid-template-columns:1fr 1fr}
+  .mosaic-cell:nth-child(1){grid-row:1;min-height:220px}
+  .room-specs{grid-template-columns:1fr 1fr}
+  .strip{padding:1rem 1.5rem;gap:1.5rem}
+  footer{padding:1.5rem;flex-direction:column;text-align:center}
+  .footer-links{flex-wrap:wrap;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Playworkz <em>Eco</em> Space</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#ambiance">Ambiance</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#discussion">Discussion Room</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+<button class="menu-toggle" id="menuToggle">
+☰
+</button>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Eco Coworking Space · Est. 2012</div>
+    <h1>Work Beautifully.<br><em>Live</em> <strong>Sustainably.</strong></h1>
+    <p class="hero-sub">A refined coworking sanctuary where biophilic design, natural materials, and considered sustainability create the ideal environment for deep work and creative thought.</p>
+    <div class="hero-actions">
+      <a href="#discussion" class="btn-gold">Reserve Discussion Room</a>
+      <a href="#about" class="btn-ghost">Discover the Space</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ── STRIP ── -->
+<div class="strip">
+  <div class="strip-item">🌿 Biophilic Design</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item">🍃 Zero Waste</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item">📶 Gigabit WiFi</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item">🤫 Quiet Focus Zones</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item">☕ Artisan Café</div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-img">🌱</div>
+       <div class="about-img-label">Since 2012<span>Coimbatore's Eco Workspace</span></div>
+  </div>
+  <div class="reveal reveal-delay-1">
+    <span class="label">Our Philosophy</span>
+    <h2 class="heading">Where Nature<br>Fuels <em>Productivity</em></h2>
+    <div class="gold-line"></div>
+    <p class="body-text">Playworkz Eco Space is Coimbatore's most thoughtfully designed coworking studio. We believe the environment you work in shapes the quality of your thinking — so we've built a space that inspires, calms, and energises in equal measure.</p>
+    <p class="body-text" style="margin-top:1rem">Every corner is intentional: reclaimed wood desks, living green walls, natural light from floor-to-ceiling windows, and the gentle sound of flowing water throughout.</p>
+    <div class="about-features">
+      <div class="feat-row"><div class="feat-num">01</div><div class="feat-content"><strong>Nature-Integrated Design</strong><p>700 sq ft of vertical gardens, moss walls, and potted trees bring the outdoors inside.</p></div></div>
+      <div class="feat-row"><div class="feat-num">02</div><div class="feat-content"><strong>Sustainably Sourced</strong><p>All furniture and fittings use recycled, reclaimed, or FSC-certified materials.</p></div></div>
+      <div class="feat-row"><div class="feat-num">03</div><div class="feat-content"><strong>Community-First Culture</strong><p>Regular events, curated member introductions, and a collaborative ethos at our core.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AMBIANCE ── -->
+<section id="ambiance">
+  <div class="ambiance-intro">
+    <div class="reveal">
+      <span class="label">The Atmosphere</span>
+      <h2 class="heading">An Ambiance<br>Crafted for<br><em>Deep Work</em></h2>
+      <div class="gold-line" style="background:rgba(201,169,110,.35)"></div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <p class="body-text">The moment you step into Playworkz, the outside world fades. Warm lighting, earthy textures, the scent of fresh greenery — every sensory detail is calibrated to put you in a state of productive calm.</p>
+    </div>
+  </div>
+  <div class="ambiance-grid reveal">
+    <div class="amb-card">
+      <span class="amb-icon">🌞</span>
+      <div class="amb-title">Natural Light Architecture</div>
+      <div class="amb-desc">South-facing skylights and floor-to-ceiling glazing flood every desk with clean daylight. No harsh fluorescents — ever.</div>
+      <span class="amb-tag">Circadian Lighting</span>
+    </div>
+    <div class="amb-card">
+      <span class="amb-icon">🌿</span>
+      <div class="amb-title">Living Green Walls</div>
+      <div class="amb-desc">Over 40 species of air-purifying plants line our walls, reducing CO₂ levels and creating a genuinely restorative backdrop.</div>
+      <span class="amb-tag">Air Purified</span>
+    </div>
+    <div class="amb-card">
+      <span class="amb-icon">🔇</span>
+      <div class="amb-title">Acoustic Design</div>
+      <div class="amb-desc">Moss panels, cork flooring, and wool ceiling baffles achieve a library-quiet 42dB ambient noise level across all zones.</div>
+      <span class="amb-tag">42dB Ambient</span>
+    </div>
+    <div class="amb-card">
+      <span class="amb-icon">🪵</span>
+      <div class="amb-title">Reclaimed Material Palette</div>
+      <div class="amb-desc">Teak desks, limestone floors, brass accents. Materials chosen for their warmth, longevity, and low environmental footprint.</div>
+      <span class="amb-tag">100% Reclaimed</span>
+    </div>
+    <div class="amb-card">
+      <span class="amb-icon">💧</span>
+      <div class="amb-title">Water Features</div>
+      <div class="amb-desc">The soft sound of our indoor stream and wall fountain creates a white noise backdrop that reduces distraction naturally.</div>
+      <span class="amb-tag">Biophilic Sound</span>
+    </div>
+    <div class="amb-card">
+      <span class="amb-icon">☕</span>
+      <div class="amb-title">Artisan Coffee Corner</div>
+      <div class="amb-desc">Locally sourced, single-origin beans brewed to order. Complimentary for all members — your third cup tastes as good as the first.</div>
+      <span class="amb-tag">Complimentary</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section id="features">
+  <div class="features-layout">
+    <div class="features-sticky reveal">
+      <span class="label">What's Included</span>
+      <h2 class="heading">Everything<br>You Need to<br><em>Do Your Best</em><br>Work</h2>
+      <div class="gold-line"></div>
+      <p class="body-text">A complete workspace ecosystem — not just a desk and a WiFi password.</p>
+    </div>
+    <div class="features-list reveal reveal-delay-1">
+      <div class="feat-card">
+        <span class="feat-card-icon">📶</span>
+        <div class="feat-card-title">Gigabit Fibre</div>
+        <div class="feat-card-desc">1Gbps symmetric connection with dedicated bandwidth per desk and enterprise-grade firewall.</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-card-icon">🖨️</span>
+        <div class="feat-card-title">Print & Scan Hub</div>
+        <div class="feat-card-desc">Colour laser printers, high-res scanners, and binding — all included in membership.</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-card-icon">🔌</span>
+        <div class="feat-card-title">Unlimited Power</div>
+        <div class="feat-card-desc">USB-C, USB-A, and international sockets at every desk. All powered by solar.</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-card-icon">🔐</span>
+        <div class="feat-card-title">24/7 Secure Access</div>
+        <div class="feat-card-desc">Biometric entry, CCTV, and personal secure lockers for every full-time member.</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-card-icon">📬</span>
+        <div class="feat-card-title">Business Address</div>
+        <div class="feat-card-desc">Use Playworkz as your registered business address, with mail handling and courier receipt.</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-card-icon">🧘</span>
+        <div class="feat-card-title">Wellness Corner</div>
+        <div class="feat-card-desc">Meditation nook, stretching space, and scheduled weekly yoga sessions for members.</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-card-icon">☕</span>
+        <div class="feat-card-title">Unlimited Beverages</div>
+        <div class="feat-card-desc">Artisan coffee, herbal teas, cold brew, and filtered water — included always.</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-card-icon">🖥️</span>
+        <div class="feat-card-title">Dual Monitor Setup</div>
+        <div class="feat-card-desc">4K external displays available on request at hot desks. Ergonomic chairs throughout.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MEMBERSHIP STATUS ── -->
+<div id="status">
+  <div class="status-msg reveal">
+    <div class="status-badge">● Seats Fully Occupied</div>
+    <h3>All Dedicated & Hot Desk Seats Are Currently Full</h3>
+    <p>We are at full capacity for individual memberships. You may join our waitlist — members are notified as spots open up. In the meantime, our <strong>Discussion Room</strong> remains available for hourly and daily bookings, open to members and non-members alike.</p>
+  </div>
+  <div class="status-action reveal reveal-delay-1">
+    <a href="#discussion" class="btn-gold" style="display:inline-block;padding:1rem 2.5rem">Book Discussion Room →</a>
+    <p>or <a href="#contact" style="color:var(--gold);text-decoration:none">join the waitlist</a></p>
+  </div>
+</div>
+
+<!-- ── DISCUSSION ROOM ── -->
+<section id="discussion">
+  <div class="discussion-inner">
+    <div class="reveal">
+      <span class="label">Available Now</span>
+      <h2 class="heading">The Discussion<br><em>Room</em></h2>
+      <div class="gold-line" style="background:rgba(201,169,110,.35)"></div>
+      <p style="font-size:.95rem;font-weight:300;line-height:1.85;color:rgba(255,255,255,.5);margin-bottom:1.5rem">Our private Discussion Room is the jewel of Playworkz — a fully equipped, acoustically sealed space designed for focused conversations, client meetings, workshops, and collaborative sessions.</p>
+      <div class="room-features-list">
+        <div class="room-feat">Seating for up to 15 people comfortably</div>
+        <div class="room-feat">65" 4K display with wireless screen sharing</div>
+        <div class="room-feat">Integrated video conferencing (Zoom, Meet, Teams)</div>
+        <div class="room-feat">Whiteboard wall — full-length writable surface</div>
+        <div class="room-feat">Acoustic panels — complete sound isolation</div>
+        <div class="room-feat">Climate control — independent A/C</div>
+        <div class="room-feat">Complimentary refreshments during booking</div>
+        <div class="room-feat">Available to members & non-members</div>
+      </div>
+      <a href="#contact" class="btn-gold" style="display:inline-block;margin-top:2rem">Reserve Your Slot →</a>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="room-visual">
+        <div class="room-available-badge">✦ Available to Book</div>
+        <div class="room-card-main">
+          <div class="room-img-placeholder">🗣️</div>
+          <div class="room-specs">
+            <div class="spec-item"><div class="spec-label">Capacity</div><div class="spec-val">Up to 15</div></div>
+            <div class="spec-item"><div class="spec-label">Size</div><div class="spec-val">220 sq ft</div></div>
+            <div class="spec-item"><div class="spec-label">Display</div><div class="spec-val">65" 4K</div></div>
+            <div class="spec-item"><div class="spec-label">Sound</div><div class="spec-val">Isolated</div></div>
+          </div>
+        </div>
+      </div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--white);margin:2rem 0 1rem">Pricing</h3>
+      <div class="pricing-cards">
+        <div class="price-card">
+          <div class="price-duration">Per Hour</div>
+          <div class="price-amount"><sup>₹</sup>999</div>
+          <div class="price-note">Minimum 1 hour booking</div>
+        </div>
+        <div class="price-card highlight">
+          <div class="price-duration">Half Day · 4 hrs</div>
+          <div class="price-amount"><sup>₹</sup>5,000</div>
+          <div class="price-note">Save ₹197 vs hourly</div>
+        </div>
+        <div class="price-card">
+          <div class="price-duration">Full Day · 8 hrs</div>
+          <div class="price-amount"><sup>₹</sup>1,0000</div>
+          <div class="price-note">Best for workshops</div>
+        </div>
+        <div class="price-card">
+          <div class="price-duration">Member Rate</div>
+          <div class="price-amount"><sup>₹</sup>000</div>
+          <div class="price-note">Per hour on waitlist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SPACE GALLERY ── -->
+<section id="space" style="padding:7rem 0">
+  <div class="space-header reveal">
+    <div>
+      <span class="label">Our Space</span>
+      <h2 class="heading" style="margin-bottom:0">Inside Playworkz</h2>
+    </div>
+    <p style="font-size:.85rem;color:var(--stone);max-width:320px;font-weight:300;line-height:1.7">A curated environment where every square foot earns its place.</p>
+  </div>
+  <div class="space-mosaic reveal">
+    <div class="mosaic-cell cell-1" style="font-size:4rem"><span class="mosaic-label">Main Work Floor</span></div>
+    <div class="mosaic-cell cell-2"><span class="mosaic-label">Coffee Corner</span></div>
+    <div class="mosaic-cell cell-3" style="font-size:2rem"><span class="mosaic-label">Discussion Room</span></div>
+    <div class="mosaic-cell cell-4" style="font-size:2rem"><span class="mosaic-label">Wellness Nook</span></div>
+    <div class="mosaic-cell cell-5" style="font-size:2rem"><span class="mosaic-label">Focus Zone</span></div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials" style="background:var(--cream)">
+  <div class="reveal" style="text-align:center">
+    <span class="label">Member Voices</span>
+    <h2 class="heading" style="max-width:100%;text-align:center;margin:0 auto">What Our Community<br><em>Says</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <p class="testi-text">The ambiance here is unlike any coworking space I've used. The living walls, the natural light, the absolute quiet — my productivity doubled within a week of joining.</p>
+      <div class="testi-author"><div class="testi-av">👨‍💻</div><div><div class="testi-name">Arjun Krishnaswamy</div><div class="testi-role">Freelance Product Designer</div></div></div>
+    </div>
+    <div class="testi-card reveal reveal-delay-1">
+      <p class="testi-text">We use the Discussion Room for all our client calls and team sprints. The AV setup is flawless, the acoustics are perfect, and the refreshments are a lovely touch.</p>
+      <div class="testi-author"><div class="testi-av">👩‍💼</div><div><div class="testi-name">Meera Sundaram</div><div class="testi-role">Founder, Sundaram Consulting</div></div></div>
+    </div>
+    <div class="testi-card reveal reveal-delay-2">
+      <p class="testi-text">Even while on the waitlist for a seat, the Discussion Room booking has been seamless. The hourly rate is very fair for what you get. Highly recommend for important meetings.</p>
+      <div class="testi-author"><div class="testi-av">🧑‍🚀</div><div><div class="testi-name">Vikram Rajan</div><div class="testi-role">Tech Lead, Startup Founder</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="reveal">
+    <span class="label">Get In Touch</span>
+    <h2 class="heading">Reserve the Discussion Room<br>or Join the <em>Waitlist</em></h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="field"><label>Full Name</label><input type="text" placeholder="Your name"/></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"/></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Phone</label><input type="tel" placeholder="+91 00000 00000"/></div>
+        <div class="field"><label>Organisation</label><input type="text" placeholder="Company / Studio"/></div>
+      </div>
+      <div class="field"><label>I'd Like To</label>
+        <select>
+          <option>Book the Discussion Room</option>
+          <option>Join the Seat Waitlist</option>
+          <option>Enquire About Events</option>
+          <option>Something Else</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Preferred Date</label><input type="date"/></div>
+        <div class="field"><label>Duration</label>
+          <select>
+            <option>1 Hour — ₹499</option>
+            <option>Half Day (4 hrs) — ₹1,799</option>
+            <option>Full Day (8 hrs) — ₹2,999</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Message</label><textarea placeholder="Tell us about your requirements..."></textarea></div>
+      <button class="btn-gold" onclick="alert('Thank you — we\'ll confirm your booking within 2 hours. ✦')" style="align-self:flex-start;margin-top:.5rem">Send Enquiry ✦</button>
+    </div>
+    <div class="contact-info reveal reveal-delay-1">
+      <p>We respond to all enquiries within 2 hours during business hours. Walk-ins for Discussion Room bookings are also welcome, subject to availability.</p>
+      <div class="info-block">
+        <div class="info-row"><div class="info-icon-box">📍</div><div class="info-detail"><strong>Location</strong><span>24 Eco Park Road, Saravanampatti,<br>Coimbatore — 641 035</span></div></div>
+        <div class="info-row"><div class="info-icon-box">📞</div><div class="info-detail"><strong>Phone</strong><span>+91 98765 43210</span></div></div>
+        <div class="info-row"><div class="info-icon-box">✉️</div><div class="info-detail"><strong>Email</strong><span>hello@playworkzecospace.in</span></div></div>
+        <div class="info-row"><div class="info-icon-box">🕐</div><div class="info-detail"><strong>Opening Hours</strong><span>Monday – Saturday: 7:00 am – 9:00 pm<br>Sunday: 9:00 am – 5:00 pm</span></div></div>
+        <div class="info-row"><div class="info-icon-box">🚗</div><div class="info-detail"><strong>Parking</strong><span>Complimentary basement parking for members &amp; visitors</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Playworkz <em>Eco</em> Space</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#ambiance">Ambiance</a>
+    <a href="#features">Features</a>
+    <a href="#discussion">Discussion Room</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p>© 2026 Playworkz Eco Space · Coimbatore</p>
+</footer>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('curRing');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+  setTimeout(() => { curRing.style.left = e.clientX + 'px'; curRing.style.top = e.clientY + 'px'; }, 60);
+});
+document.querySelectorAll('a,button,.feat-card,.amb-card,.act-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { curRing.style.width = '52px'; curRing.style.height = '52px'; curRing.style.opacity = '1'; });
+  el.addEventListener('mouseleave', () => { curRing.style.width = '32px'; curRing.style.height = '32px'; curRing.style.opacity = '.6'; });
+});
+
+// Navbar scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('show'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<script>
+const toggle = document.getElementById("menuToggle");
+const menu = document.getElementById("navMenu");
+
+toggle.onclick = function(){
+menu.classList.toggle("active");
+}
+</script>
+</body>
+</html>

@@ -77,7 +77,7 @@ cursor:pointer;
 display:block;
 }
 
-.nav-menu{
+.nav-links{
 position:fixed;
 top:0;
 right:-100%;
@@ -91,7 +91,7 @@ gap:25px;
 transition:0.4s;
 }
 
-.nav-menu.active{
+.nav-links.active{
 right:0;
 }
 
@@ -318,7 +318,7 @@ section{padding:7rem 4rem}
 .status-action{text-align:center}
 .status-action p{font-size:.78rem;color:var(--stone);margin-top:.8rem;letter-spacing:.05em}
 
-/* ── DISCUSSION ROOM ── */
+/* ── CONFERENCE ROOM ── */
 #discussion{background:var(--ink);position:relative;overflow:hidden}
 #discussion::before{
   content:'';position:absolute;
@@ -355,7 +355,7 @@ section{padding:7rem 4rem}
   overflow:hidden;
 }
 .room-img-placeholder::after{
-  content:'DISCUSSION ROOM';
+  content:'CONFERENCE ROOM';
   position:absolute;bottom:1rem;left:1rem;
   font-size:.6rem;letter-spacing:.18em;color:rgba(201,169,110,.5);
 }
@@ -538,17 +538,19 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
 <!-- ── NAV ── -->
 <nav id="navbar">
   <a href="#" class="nav-logo">Playworkz <em>Eco</em> Space</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navMenu">
     <li><a href="#about">About</a></li>
     <li><a href="#ambiance">Ambiance</a></li>
     <li><a href="#features">Features</a></li>
-    <li><a href="#discussion">Discussion Room</a></li>
+    <li><a href="#discussion">Conference Room</a></li>
     <li><a href="#contact" class="nav-cta">Book Now</a></li>
   </ul>
-</nav>
-<button class="menu-toggle" id="menuToggle">
+
+  <button class="menu-toggle" id="menuToggle">
 ☰
 </button>
+</nav>
+
 
 <!-- ── HERO ── -->
 <section class="hero" id="home">
@@ -559,7 +561,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
     <h1>Work Beautifully.<br><em>Live</em> <strong>Sustainably.</strong></h1>
     <p class="hero-sub">A refined coworking sanctuary where biophilic design, natural materials, and considered sustainability create the ideal environment for deep work and creative thought.</p>
     <div class="hero-actions">
-      <a href="#discussion" class="btn-gold">Reserve Discussion Room</a>
+      <a href="#discussion" class="btn-gold">Reserve Conference Room</a>
       <a href="#about" class="btn-ghost">Discover the Space</a>
     </div>
   </div>
@@ -595,7 +597,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
     <p class="body-text">Playworkz Eco Space is Coimbatore's most thoughtfully designed coworking studio. We believe the environment you work in shapes the quality of your thinking — so we've built a space that inspires, calms, and energises in equal measure.</p>
     <p class="body-text" style="margin-top:1rem">Every corner is intentional: reclaimed wood desks, living green walls, natural light from floor-to-ceiling windows, and the gentle sound of flowing water throughout.</p>
     <div class="about-features">
-      <div class="feat-row"><div class="feat-num">01</div><div class="feat-content"><strong>Nature-Integrated Design</strong><p>700 sq ft of vertical gardens, moss walls, and potted trees bring the outdoors inside.</p></div></div>
+      <div class="feat-row"><div class="feat-num">01</div><div class="feat-content"><strong>Nature-Integrated Design</strong><p>1500 sq ft of modern architecture, moss walls, and potted trees bring the outdoors inside.</p></div></div>
       <div class="feat-row"><div class="feat-num">02</div><div class="feat-content"><strong>Sustainably Sourced</strong><p>All furniture and fittings use recycled, reclaimed, or FSC-certified materials.</p></div></div>
       <div class="feat-row"><div class="feat-num">03</div><div class="feat-content"><strong>Community-First Culture</strong><p>Regular events, curated member introductions, and a collaborative ethos at our core.</p></div></div>
     </div>
@@ -607,7 +609,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
   <div class="ambiance-intro">
     <div class="reveal">
       <span class="label">The Atmosphere</span>
-      <h2 class="heading">An Ambiance<br>Crafted for<br><em>Deep Work</em></h2>
+
       <div class="gold-line" style="background:rgba(201,169,110,.35)"></div>
     </div>
     <div class="reveal reveal-delay-1">
@@ -713,10 +715,10 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
   <div class="status-msg reveal">
     <div class="status-badge">● Seats Fully Occupied</div>
     <h3>All Dedicated & Hot Desk Seats Are Currently Full</h3>
-    <p>We are at full capacity for individual memberships. You may join our waitlist — members are notified as spots open up. In the meantime, our <strong>Discussion Room</strong> remains available for hourly and daily bookings, open to members and non-members alike.</p>
+    <p>We are at full capacity for individual memberships. You may join our waitlist — members are notified as spots open up. In the meantime, our <strong>Conference Room</strong> remains available for hourly and daily bookings, open to members and non-members alike.</p>
   </div>
   <div class="status-action reveal reveal-delay-1">
-    <a href="#discussion" class="btn-gold" style="display:inline-block;padding:1rem 2.5rem">Book Discussion Room →</a>
+    <a href="#discussion" class="btn-gold" style="display:inline-block;padding:1rem 2.5rem">Book Conference Room →</a>
     <p>or <a href="#contact" style="color:var(--gold);text-decoration:none">join the waitlist</a></p>
   </div>
 </div>
@@ -726,9 +728,9 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
   <div class="discussion-inner">
     <div class="reveal">
       <span class="label">Available Now</span>
-      <h2 class="heading">The Discussion<br><em>Room</em></h2>
+      <h2 class="heading">The Conference<br><em>Room</em></h2>
       <div class="gold-line" style="background:rgba(201,169,110,.35)"></div>
-      <p style="font-size:.95rem;font-weight:300;line-height:1.85;color:rgba(255,255,255,.5);margin-bottom:1.5rem">Our private Discussion Room is the jewel of Playworkz — a fully equipped, acoustically sealed space designed for focused conversations, client meetings, workshops, and collaborative sessions.</p>
+      <p style="font-size:.95rem;font-weight:300;line-height:1.85;color:rgba(255,255,255,.5);margin-bottom:1.5rem">Our private Conference Room is the jewel of Playworkz — a fully equipped, acoustically sealed space designed for focused conversations, client meetings, workshops, and collaborative sessions.</p>
       <div class="room-features-list">
         <div class="room-feat">Seating for up to 15 people comfortably</div>
         <div class="room-feat">65" 4K display with wireless screen sharing</div>
@@ -758,13 +760,13 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
       <div class="pricing-cards">
         <div class="price-card">
           <div class="price-duration">Per Hour</div>
-          <div class="price-amount"><sup>₹</sup>999</div>
+          <div class="price-amount"><sup>₹</sup>1,099</div>
           <div class="price-note">Minimum 1 hour booking</div>
         </div>
         <div class="price-card highlight">
           <div class="price-duration">Half Day · 4 hrs</div>
           <div class="price-amount"><sup>₹</sup>5,000</div>
-          <div class="price-note">Save ₹197 vs hourly</div>
+          <div class="price-note">Save ₹99 vs hourly</div>
         </div>
         <div class="price-card">
           <div class="price-duration">Full Day · 8 hrs</div>
@@ -793,7 +795,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
   <div class="space-mosaic reveal">
     <div class="mosaic-cell cell-1" style="font-size:4rem"><span class="mosaic-label">Main Work Floor</span></div>
     <div class="mosaic-cell cell-2"><span class="mosaic-label">Coffee Corner</span></div>
-    <div class="mosaic-cell cell-3" style="font-size:2rem"><span class="mosaic-label">Discussion Room</span></div>
+    <div class="mosaic-cell cell-3" style="font-size:2rem"><span class="mosaic-label">Conference Room</span></div>
     <div class="mosaic-cell cell-4" style="font-size:2rem"><span class="mosaic-label">Wellness Nook</span></div>
     <div class="mosaic-cell cell-5" style="font-size:2rem"><span class="mosaic-label">Focus Zone</span></div>
   </div>
@@ -811,11 +813,11 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
       <div class="testi-author"><div class="testi-av">👨‍💻</div><div><div class="testi-name">Arjun Krishnaswamy</div><div class="testi-role">Freelance Product Designer</div></div></div>
     </div>
     <div class="testi-card reveal reveal-delay-1">
-      <p class="testi-text">We use the Discussion Room for all our client calls and team sprints. The AV setup is flawless, the acoustics are perfect, and the refreshments are a lovely touch.</p>
+      <p class="testi-text">We use the Conference Room for all our client calls and team sprints. The AV setup is flawless, the acoustics are perfect, and the refreshments are a lovely touch.</p>
       <div class="testi-author"><div class="testi-av">👩‍💼</div><div><div class="testi-name">Meera Sundaram</div><div class="testi-role">Founder, Sundaram Consulting</div></div></div>
     </div>
     <div class="testi-card reveal reveal-delay-2">
-      <p class="testi-text">Even while on the waitlist for a seat, the Discussion Room booking has been seamless. The hourly rate is very fair for what you get. Highly recommend for important meetings.</p>
+      <p class="testi-text">Even while on the waitlist for a seat, the Conference Room booking has been seamless. The hourly rate is very fair for what you get. Highly recommend for important meetings.</p>
       <div class="testi-author"><div class="testi-av">🧑‍🚀</div><div><div class="testi-name">Vikram Rajan</div><div class="testi-role">Tech Lead, Startup Founder</div></div></div>
     </div>
   </div>
@@ -825,7 +827,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
 <section id="contact">
   <div class="reveal">
     <span class="label">Get In Touch</span>
-    <h2 class="heading">Reserve the Discussion Room<br>or Join the <em>Waitlist</em></h2>
+    <h2 class="heading">Reserve the Conference Room<br>or Join the <em>Waitlist</em></h2>
   </div>
   <div class="contact-grid">
     <div class="contact-form reveal">
@@ -839,7 +841,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
       </div>
       <div class="field"><label>I'd Like To</label>
         <select>
-          <option>Book the Discussion Room</option>
+          <option>Book the Conference Room</option>
           <option>Join the Seat Waitlist</option>
           <option>Enquire About Events</option>
           <option>Something Else</option>
@@ -849,7 +851,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
         <div class="field"><label>Preferred Date</label><input type="date"/></div>
         <div class="field"><label>Duration</label>
           <select>
-            <option>1 Hour — ₹999</option>
+            <option>1 Hour — ₹1,099</option>
             <option>Half Day (4 hrs) — ₹5,000</option>
             <option>Full Day (8 hrs) — ₹10,000</option>
           </select>
@@ -859,13 +861,13 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
       <button class="btn-gold" onclick="alert('Thank you — we\'ll confirm your booking within 2 hours. ✦')" style="align-self:flex-start;margin-top:.5rem">Send Enquiry ✦</button>
     </div>
     <div class="contact-info reveal reveal-delay-1">
-      <p>We respond to all enquiries within 2 hours during business hours. Walk-ins for Discussion Room bookings are also welcome, subject to availability.</p>
+      <p>We respond to all enquiries within 2 hours during business hours. Walk-ins for Conference Room bookings are also welcome, subject to availability.</p>
       <div class="info-block">
-        <div class="info-row"><div class="info-icon-box">📍</div><div class="info-detail"><strong>Location</strong><span>Coimbatore — 641 035</span></div></div>
-        <div class="info-row"><div class="info-icon-box">📞</div><div class="info-detail"><strong>Phone</strong><span>+91 00000 00000</span></div></div>
-        <div class="info-row"><div class="info-icon-box">✉️</div><div class="info-detail"><strong>Email</strong><span>hello@playworkzecospace.in</span></div></div>
+        <div class="info-row"><div class="info-icon-box">📍</div><div class="info-detail"><strong>Location</strong><span>1/583, Poongothai Nagar Main Road, Civil Aerodrome Post, Coimbatore, Tamil Nadu, India 641014</span></div></div>
+        <div class="info-row"><div class="info-icon-box">📞</div><div class="info-detail"><strong>Phone</strong><span>+91 98436 41004</span></div></div>
+        <div class="info-row"><div class="info-icon-box">✉️</div><div class="info-detail"><strong>Email</strong><span>prosper@playworkz.co</span></div></div>
         <div class="info-row"><div class="info-icon-box">🕐</div><div class="info-detail"><strong>Opening Hours</strong><span>Monday – Saturday: 7:00 am – 9:00 pm<br>Sunday: 9:00 am – 5:00 pm</span></div></div>
-        <div class="info-row"><div class="info-icon-box">🚗</div><div class="info-detail"><strong>Parking</strong><span>Complimentary basement parking for members &amp; visitors</span></div></div>
+        <div class="info-row"><div class="info-icon-box">🚗</div><div class="info-detail"><strong>Parking</strong><span>Complimentary parking for members &amp; visitors</span></div></div>
       </div>
     </div>
   </div>
@@ -878,7 +880,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
     <a href="#about">About</a>
     <a href="#ambiance">Ambiance</a>
     <a href="#features">Features</a>
-    <a href="#discussion">Discussion Room</a>
+    <a href="#discussion">Conference Room</a>
     <a href="#contact">Contact</a>
   </div>
   <p>© 2026 Playworkz Eco Space · Coimbatore</p>
@@ -914,9 +916,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 const toggle = document.getElementById("menuToggle");
 const menu = document.getElementById("navMenu");
 
-toggle.onclick = function(){
-menu.classList.toggle("active");
-}
+toggle.addEventListener("click", () => {
+  menu.classList.toggle("active");
+});
 </script>
 </body>
 </html>
